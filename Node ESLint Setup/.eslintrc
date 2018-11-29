@@ -1,0 +1,11 @@
+{
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "max-len": [1, 10000, 2, {"ignoreComments": true}],
+    "semi": [2, "never"],
+    "no-console":  ["error", { "allow": ["warn", "error", "log"] }]
+  },
+  "extends": ["airbnb"]
+}
