@@ -1,16 +1,16 @@
-/* eslint-disable no-multi-spaces */
 /*
-Connections
+MongoDB - Connections
 -------------------------------------------------------------------------------------
+Mongoose single (default) database connection (mongoose.connect()) with automatic reconnect,
+connection status handling, error handling and process signal handling.
+
 Usage:
-node 1_connections.js
+node 1_single_connection_handler.js
 */
 
 const process = require('process');
 const mongoose = require('mongoose');
 
-// Handle the MongoDB connection status and automatic reconnect
-// ------------------------------------------------------------------------------------------------
 const mongoUri = 'mongodb://localhost:27017/mindrobe';
 
 const options = {
@@ -19,6 +19,8 @@ const options = {
   useUnifiedTopology: true,
   // Use IPv4
   family: 4,
+  // The max number of sockets will keep open for this connection (default 5)
+  poolSize: 5,
   // Timeout for inital connection attempt, as well as sending operations
   serverSelectionTimeoutMS: 3000,
   // Checks status (readyState) of the connection in intervals
@@ -30,7 +32,9 @@ const options = {
 
 const db = mongoose.connection;
 
-const handleConnectionStatusChange = () => {
+// Catch database connection and readyState events and handle them
+// ------------------------------------------------------------------------------------------------
+const handleReadyStateStatusChange = () => {
   switch (db.readyState) {
   case 0:
     console.log('DB: Disconnected!');
@@ -52,13 +56,33 @@ const handleConnectionStatusChange = () => {
   }
 };
 
-db.on('connecting', handleConnectionStatusChange)
-  .on('connected', handleConnectionStatusChange)
-  .on('disconnecting', handleConnectionStatusChange)
-  .on('disconnected', handleConnectionStatusChange)
-  .on('invalid credentials', handleConnectionStatusChange);
+const handleConnectionStatusChange = (event) => {
+  switch (event) {
+  case 'reconnected':
+    console.log('DB: Reconnected to database successfully!');
+    break;
+  case 'reconnectFailed':
+    console.log('DB: Re-connect failed!');
+    break;
+  case 'error':
+    console.log('DB: A connection error ocurred!');
+    break;
+  default:
+    console.log('DB Error: Unknown event!');
+  }
+};
 
-// Detects if the app is restarted or exited and gracefully closes the database connection
+db.on('connecting', handleReadyStateStatusChange)
+  .on('connected', handleReadyStateStatusChange)
+  .on('disconnecting', handleReadyStateStatusChange)
+  .on('disconnected', handleReadyStateStatusChange)
+  .on('invalid credentials', handleReadyStateStatusChange);
+
+db.on('reconnected', () => handleConnectionStatusChange('reconnected'))
+  .on('reconnectFailed', () => handleConnectionStatusChange('reconnectFailed'))
+  .on('error', () => handleConnectionStatusChange('error'));
+
+// Catch process events if the app is restarted or exited and gracefully close the database connection
 // ------------------------------------------------------------------------------------------------
 const gracefulExit = () => {
   db.close()
@@ -85,4 +109,8 @@ const connectedToDatabase = () => {
 
 mongoose.connect(mongoUri, options)
   .then(() => connectedToDatabase())
-  .catch((error) => console.log(error.message));
+  // If the initial connect fails, mongoose will NOT automatically try to reconnect.
+  .catch((error) => {
+    console.log(error.name);
+    console.log(error.message);
+  });
