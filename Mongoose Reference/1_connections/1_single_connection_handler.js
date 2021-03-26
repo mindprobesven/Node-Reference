@@ -3,15 +3,12 @@ MongoDB - Connections
 -------------------------------------------------------------------------------------
 Mongoose single (default) database connection (mongoose.connect()) with automatic reconnect,
 connection status handling, error handling and process signal handling.
-
-Usage:
-node 1_single_connection_handler.js
 */
 
 const process = require('process');
 const mongoose = require('mongoose');
 
-const mongoUri = 'mongodb://localhost:27017/mindrobe';
+const mongoUri = 'mongodb://localhost:27017/mindprobe';
 
 const options = {
   useNewUrlParser: true,
