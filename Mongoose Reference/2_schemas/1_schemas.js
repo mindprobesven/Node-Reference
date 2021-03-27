@@ -1,10 +1,7 @@
-/* eslint-disable arrow-body-style */
-/* eslint-disable no-unused-vars */
 /* eslint-disable func-names */
-/*
-MongoDB - Schemas
--------------------------------------------------------------------------------------
-*/
+
+// MongoDB - Schemas
+// -------------------------------------------------------------------------------------
 
 const mongoose = require('mongoose');
 
@@ -27,11 +24,12 @@ const userSchema = new Schema({
 console.log(userSchema.path('_id'));
 console.log('-'.repeat(50));
 
-// Creating custom instance methods
+// Creating custom Schema instance methods
 userSchema.methods.fullName = function () {
   return `${this.first} ${this.last}`;
 };
 
+// Note: Do NOT declare methods using ES6 arrow functions (=>)
 userSchema.methods.getAllUsers = function (cb) {
   return model('User').find({}, cb);
 };
@@ -41,16 +39,13 @@ userSchema.methods.getAllUsers = function (cb) {
 // The first argument is the singular name of the collection your model is for. Mongoose automatically
 // looks for the plural, lowercased version of your model name. Thus, the model 'User' is for the
 // 'users' collection in the database.
-const User = model('User', userSchema);
+const UserModel = model('User', userSchema);
 
 // ------------------------------------------------------------------------------------------------
-// ------------------------------------------------------------------------------------------------
-// ------------------------------------------------------------------------------------------------
-// ------------------------------------------------------------------------------------------------
-// ------------------------------------------------------------------------------------------------
+
 const addUser = async () => {
   // Creating a Document from a Model
-  const newUser = new User({
+  const newUserDocument = new UserModel({
     first: 'Sven',
     last: 'Kohn',
     age: 41,
@@ -58,27 +53,27 @@ const addUser = async () => {
   });
 
   // Returns the document object
-  console.log(newUser);
-  // Returns the full name of the user by using the Schema's instance method
-  console.log(newUser.fullName());
+  console.log(newUserDocument);
+  // Returns the full name of the user by using the Schema's instance method fullName()
+  console.log(newUserDocument.fullName());
 
-  return newUser.save();
+  return newUserDocument.save();
 };
 
-const getUserlistWithSchemaInstanceMethod = () => {
-  return new Promise((resolve, reject) => {
-    const userList = new User();
+const getUserlistWithSchemaInstanceMethod = () => new Promise(
+  (resolve, reject) => {
+    const userList = new UserModel();
     userList.getAllUsers((error, result) => {
       if (error) {
         reject(error);
       }
       resolve(result);
     });
-  });
-};
+  },
+);
 
 const connectedToDatabase = async () => {
-  console.log('Ready...');
+  console.log('Connected to database!');
 
   try {
     const savedUserDocument = await addUser();
@@ -92,6 +87,7 @@ const connectedToDatabase = async () => {
 
   try {
     const userList = await getUserlistWithSchemaInstanceMethod();
+    console.log('User list:');
     console.log(userList);
   } catch (error) {
     console.log(`${error.name}: ${error.message}`);
