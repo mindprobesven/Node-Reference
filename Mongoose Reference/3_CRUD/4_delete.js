@@ -1,4 +1,5 @@
-// MongoDB - Creating Documents
+/* eslint-disable no-multi-spaces */
+// MongoDB - Deleting Documents
 // -------------------------------------------------------------------------------------
 
 const mongoose = require('mongoose');
@@ -26,22 +27,6 @@ const UserModel = model('User', userSchema);
 
 // ------------------------------------------------------------------------------------------------
 
-const insertOneUser = async () => {
-  console.log('Inserting one user');
-  const newUserDocument = new UserModel(users[0]);
-  // Before the document is saved, it is validated. An error is thrown if validation fails.
-  // For example: If the age of user 'Sven' is -1, a ValidationError is thrown.
-  // ValidationError: User validation failed: age: Path `age` (-1) is less than minimum allowed value (0).
-  return newUserDocument.save();
-};
-
-const insertAllUsers = async () => {
-  console.log('Inserting all users');
-  // Mongoose always validates each document before sending insertMany to MongoDB.
-  // If one document has a validation error, no documents will be saved.
-  return UserModel.insertMany(users);
-};
-
 const cleanCollection = async () => {
   const docCount = await UserModel.countDocuments();
   if (docCount > 0) {
@@ -49,6 +34,11 @@ const cleanCollection = async () => {
     return UserModel.deleteMany({});
   }
   return false;
+};
+
+const insertSampleDataUsers = async () => {
+  console.log('Inserting users sample data documents');
+  return UserModel.insertMany(users);
 };
 
 const connectedToDatabase = async () => {
@@ -59,18 +49,22 @@ const connectedToDatabase = async () => {
     // ---------------------------------------------------
     // Delete all documents in the users collection
     await cleanCollection();
+    // Insert an array of user sample data documents
+    await insertSampleDataUsers();
     console.log('-'.repeat(50));
     // ---------------------------------------------------
 
-    // Insert a single user document
-    const insertedUserDocument = await insertOneUser();
-    console.log(insertedUserDocument);
-    console.log('-'.repeat(50));
+    // Deleting one document with a matching condition
+    const resultDeleteOne = await UserModel.deleteOne({ first: /BARbara/i });
+    console.log(resultDeleteOne);    // { n: 1, ok: 1, deletedCount: 1 }
 
-    // Insert an array of user documents
-    const allInsertedUserDocuments = await insertAllUsers();
-    console.log(allInsertedUserDocuments);
-    console.log('-'.repeat(50));
+    // Deleting many documents with a matching condition
+    const resultDeleteMany = await UserModel.deleteMany({ age: { $gte: 10 } });
+    console.log(resultDeleteMany);
+
+    // Deleting all documents in a collection
+    const resultDeleteAll = await UserModel.deleteMany({});
+    console.log(resultDeleteAll);
   } catch (error) {
     console.error(`${error.name}: ${error.message}`);
   }
