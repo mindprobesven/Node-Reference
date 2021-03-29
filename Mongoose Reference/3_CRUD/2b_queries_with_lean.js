@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-multi-spaces */
-// MongoDB - Queries
+// MongoDB - Queries with Lean
 // -------------------------------------------------------------------------------------
 
 const mongoose = require('mongoose');
@@ -87,54 +87,28 @@ const connectedToDatabase = async () => {
     console.log('-'.repeat(50));
     // ---------------------------------------------------
 
-    // Finds a user with first name matching Sven (case-insensitive),
-    // selects the 'first' and 'last' fields and unselects the '_id' field.
-    const matchingUserDocument = await UserModel
-      .findOne({ first: /Sven/i })
-      .select('first last -_id');
-    console.log(matchingUserDocument);   // { first: 'Sven', last: 'Kohn' }
+    // The 'lean' option tells Mongoose to skip hydrating the result documents.
+    // This makes queries faster and less memory intensive, but the result
+    // documents are plain old JavaScript objects (POJOs), not Mongoose documents.
+    // Enabling the lean option tells Mongoose to skip instantiating a full Mongoose
+    // document and just give you the POJO.
+    //
+    // The downside of enabling lean is that lean docs don't have:
+    // Change tracking
+    // Casting and validation
+    // Getters and setters
+    // Virtuals
+    // save()
+    //
+    // When to use lean?
+    // Whenever the results of a query don't need to be modifed.
+    // For example sending an Express response.
+    const leanDocument = await UserModel.findOne({ first: /sven/i }).lean();
 
-    console.log('-'.repeat(50));
+    console.log(leanDocument instanceof mongoose.Document);  // false
+    console.log(leanDocument.constructor.name);   // Object instead of a model
 
-    // Finding matches in simple arrays
-    // ------------------------------------------------------------------------------------------------
-    let matchingUserDocuments = await UserModel
-    // Finding matches where the field 'likes' value is an array that contains 'movies' as one of its elements.
-    // .find({ likes: /movies/i })
-
-    // Finding matches where the field 'likes' value is an array with exactly the query array in the same order
-    // .find({ likes: ['Movies', 'Social Media', 'Family'] })
-
-    // Finding matches where the field 'likes' value is an array with all items in the query array without regard to order
-    // .find({ likes: { $all: ['Movies', 'Family'] } })
-
-      // Finding matches where the field 'likes' value is an array including either 'movies' or 'painting'
-      .find({ likes: { $in: [/movies/i, /painting/i] } })
-
-    // Specify multiple conditions for array elements
-    // ----------------------------------------------
-    // Finding matches that are greater than 15 or less than 20 or both
-    // .find( { dim_cm: { $gt: 15, $lt: 20 } } )
-
-    // Finding matches that are both greater than 15 AND less than 20
-    // .find( { dim_cm: { $elemMatch: { $gt: 15, $lt: 20 } } } )
-      .select('first last -_id')
-      .sort('first');
-    console.log(matchingUserDocuments);
-
-    console.log('-'.repeat(50));
-
-    // Finding matches in an array of objects
-    // ------------------------------------------------------------------------------------------------
-    matchingUserDocuments = await UserModel
-    // Specify a 'single' Query condition directly on a Field (skills.skill) in an Array of Objects
-    // .find({ 'skills.skill': /painting/i })
-
-      // Specify 'multiple' query conditions on fields in an array of objects
-      .find({ skills: { $elemMatch: { skill: /painting/i, level: { $gt: 5 } } } })
-      .select('first last -_id')
-      .sort('first');
-    console.log(matchingUserDocuments);
+    console.log(leanDocument);
   } catch (error) {
     console.error(`${error.name}: ${error.message}`);
   }
