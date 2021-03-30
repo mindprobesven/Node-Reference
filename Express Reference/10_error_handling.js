@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /*
 Error handling
 -------------------------------------------------------------------------------------
@@ -16,7 +17,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const defaultErrorHandler = (err, req, res, next) => {
   console.log('Default error handler');
-  console.error(err.stack);
+  console.error(err);
   res.status(500).send('Default error handler');
 };
 

@@ -23,17 +23,29 @@ const configurableMiddleware = (options) => (req, res, next) => {
   next();
 };
 
-// Every time the app receives a request, it calls the middleware function 'myLogger'
-app.use(myLogger);
-// This middleware function adds a property called requestTime to the request object
-app.use(requestTime);
-// Defining a middleware with options (object or params)
-app.use(configurableMiddleware({ destroy: true }));
+// -------------------------------------------------------------------------------------
 
+// Every time the app receives any request, it calls the middleware function 'myLogger'
+app.use(myLogger);
+
+// This middleware function adds a property called requestTime to the request object
+app.use('/', requestTime);
+
+// Defining a middleware with options (object or params)
+app.use('/destroy', configurableMiddleware({ destroy: true }));
+
+// -------------------------------------------------------------------------------------
+
+// This route will use the myLogger and requestTime middleware
 app.get('/', (req, res) => {
   let responseText = 'Hello World!<br>';
   responseText += `<small>Requested at: ${req.requestTime} </small>`;
   res.send(responseText);
+});
+
+// This route will use the myLogger and configurableMiddleware middleware
+app.get('/destroy', (req, res) => {
+  res.send('Executes after configurableMiddleware middleware');
 });
 
 app.listen(port, () => {

@@ -37,7 +37,7 @@ app.get('/plantae/:genus.:species', (req, res) => {
 });
 
 /* To have more control over the exact string that can be matched by a route parameter,
-you can append a regular expression in parentheses (())
+you can append a regular expression in parentheses ()
 This example route executes only if the userId is an integer value */
 /*
 Request URL: http://localhost:3000/user/42

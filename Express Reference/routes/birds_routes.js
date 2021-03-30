@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-// Middleware function
+// Middleware function that executes on each request and before res.send()
 router.use((req, res, next) => {
   console.log('Time: ', Date.now());
   next();

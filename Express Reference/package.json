@@ -1,7 +1,7 @@
 {
-  "name": "eslint-setup",
+  "name": "express",
   "version": "1.0.0",
-  "description": "ESLint Setup",
+  "description": "Express Reference",
   "private": true,
   "author": "Sven Kohn",
   "license": "ISC",
