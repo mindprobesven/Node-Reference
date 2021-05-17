@@ -1,5 +1,4 @@
 /* eslint-disable no-multi-spaces */
-/* eslint-disable semi */
 /*
 Request object
 -------------------------------------------------------------------------------------
@@ -15,11 +14,11 @@ const port = 3000;
 
 // Request body is parsed for the '/add' route only
 app.use('/add', bodyParser.json());   // for parsing application/json
-app.use('/add', bodyParser.urlencoded({ extended: true }))    // for parsing application/x-www-form-urlencoded
+app.use('/add', bodyParser.urlencoded({ extended: true }));    // for parsing application/x-www-form-urlencoded
 
 // Request body is parsed for the '/accept' route only
 app.use('/accept', bodyParser.json());   // for parsing application/json
-app.use('/accept', bodyParser.urlencoded({ extended: true }))    // for parsing application/x-www-form-urlencoded
+app.use('/accept', bodyParser.urlencoded({ extended: true }));    // for parsing application/x-www-form-urlencoded
 
 app.get('/product/:id', (req, res) => {
   // Contains key-value pairs of data submitted in the request body. By default, it is
