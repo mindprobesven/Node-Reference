@@ -6,23 +6,20 @@ Request object
 
 const express = require('express');
 
-// The body-parsing middleware is needed to populate req.body for parsing application/json
-const bodyParser = require('body-parser');
-
 const app = express();
 const port = 3000;
 
 // Request body is parsed for the '/add' route only
-app.use('/add', bodyParser.json());   // for parsing application/json
-app.use('/add', bodyParser.urlencoded({ extended: true }));    // for parsing application/x-www-form-urlencoded
+app.use('/add', express.json());   // for parsing application/json
+app.use('/add', express.urlencoded({ extended: true }));    // for parsing application/x-www-form-urlencoded
 
 // Request body is parsed for the '/accept' route only
-app.use('/accept', bodyParser.json());   // for parsing application/json
-app.use('/accept', bodyParser.urlencoded({ extended: true }));    // for parsing application/x-www-form-urlencoded
+app.use('/accept', express.json());   // for parsing application/json
+app.use('/accept', express.urlencoded({ extended: true }));    // for parsing application/x-www-form-urlencoded
 
 app.get('/product/:id', (req, res) => {
-  // Contains key-value pairs of data submitted in the request body. By default, it is
-  // undefined, and is populated when you use body-parsing middleware such as body-parser and multer.
+  // Contains key-value pairs of data submitted in the request body. By default, it is undefined, and is
+  // populated when you use body-parsing middleware such as express.json() or express.urlencoded().
   console.log(req.body);
   console.log(req.cookies);
   // When the response is still “fresh” in the client’s cache true is returned, otherwise false is returned
@@ -69,8 +66,6 @@ app.post('/add', (req, res) => {
   // Checks if the incoming request's 'Content-Type' matches the type specified
   // Returns the type if true, otherwise false
   console.log(req.is('application/json'));  // application/json
-  // Contains key-value pairs of data submitted in the request body.
-  // By default, it is undefined, and is populated when you use body-parsing middleware such as body-parser.
   console.log(req.body);    // { name: 'Sven Kohn', email: 'sven@minprobe.io', age: 50 }
 
   res.send('Done');
