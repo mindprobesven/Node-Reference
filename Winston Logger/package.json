@@ -5,6 +5,10 @@
   "private": true,
   "author": "Sven Kohn",
   "license": "ISC",
+  "scripts": {
+    "2-log-file-rotation-dev": "NODE_ENV=development nodemon 2_log_file_rotation.js",
+    "2-log-file-rotation-prod": "NODE_ENV=production nodemon 2_log_file_rotation.js"
+  },
   "devDependencies": {
     "eslint": "^7.18.0",
     "eslint-config-airbnb": "^18.2.1",

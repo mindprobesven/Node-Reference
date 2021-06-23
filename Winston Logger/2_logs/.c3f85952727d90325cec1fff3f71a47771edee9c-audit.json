@@ -1,0 +1,14 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/home/mindprobe/Desktop/Repos/Node-Reference/Winston Logger/2_logs/.c3f85952727d90325cec1fff3f71a47771edee9c-audit.json",
+    "files": [
+        {
+            "date": 1624447703760,
+            "name": "/home/mindprobe/Desktop/Repos/Node-Reference/Winston Logger/2_logs/errors-2021-06-23-13.log",
+            "hash": "89eaa9d2bf7be173b7af1441606b85d4"
+        }
+    ]
+}

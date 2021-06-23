@@ -1,0 +1,6 @@
+[ 2021-06-23 13:28:23 ] info: [ Express - GET ] This is a JSON object log message
+[ 2021-06-23 13:28:23 ] error: [ Express - GET ] Error: Bad Request
+[ 2021-06-23 13:38:34 ] info: [ Express - GET ] This is a JSON object log message
+[ 2021-06-23 13:38:34 ] error: [ Express - GET ] Error: Bad Request
+[ 2021-06-23 13:40:04 ] info: [ Express - GET ] This is a JSON object log message
+[ 2021-06-23 13:40:04 ] error: [ Express - GET ] Error: Bad Request

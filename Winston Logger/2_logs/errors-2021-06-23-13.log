@@ -1,29 +1,21 @@
-[ 2021-06-22 17:20:55 ] error: Error: Error as meta
-    at Object.<anonymous> (/home/mindprobe/Desktop/Repos/Node-Reference/Winston Logger/2_log_file_rotation.js:89:42)
+[ 2021-06-23 13:28:23 ] error: [ Express - GET ] Bad Request Error: Bad Request
+    at Object.<anonymous> (/home/mindprobe/Desktop/Repos/Node-Reference/Winston Logger/2_log_file_rotation.js:100:12)
     at Module._compile (node:internal/modules/cjs/loader:1108:14)
     at Object.Module._extensions..js (node:internal/modules/cjs/loader:1137:10)
     at Module.load (node:internal/modules/cjs/loader:973:32)
     at Function.Module._load (node:internal/modules/cjs/loader:813:14)
     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)
     at node:internal/main/run_main_module:17:47
-[ 2021-06-22 17:22:14 ] error: Important error:  Error as meta Error: Error as meta
-    at Object.<anonymous> (/home/mindprobe/Desktop/Repos/Node-Reference/Winston Logger/2_log_file_rotation.js:89:42)
+[ 2021-06-23 13:38:34 ] error: [ Express - GET ] Bad Request Error: Bad Request
+    at Object.<anonymous> (/home/mindprobe/Desktop/Repos/Node-Reference/Winston Logger/2_log_file_rotation.js:111:12)
     at Module._compile (node:internal/modules/cjs/loader:1108:14)
     at Object.Module._extensions..js (node:internal/modules/cjs/loader:1137:10)
     at Module.load (node:internal/modules/cjs/loader:973:32)
     at Function.Module._load (node:internal/modules/cjs/loader:813:14)
     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)
     at node:internal/main/run_main_module:17:47
-[ 2021-06-22 17:22:32 ] error: Important error:  Error as meta Error: Error as meta
-    at Object.<anonymous> (/home/mindprobe/Desktop/Repos/Node-Reference/Winston Logger/2_log_file_rotation.js:89:42)
-    at Module._compile (node:internal/modules/cjs/loader:1108:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1137:10)
-    at Module.load (node:internal/modules/cjs/loader:973:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:813:14)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)
-    at node:internal/main/run_main_module:17:47
-[ 2021-06-22 17:25:42 ] error: Important error:  Error as meta Error: Error as meta
-    at Object.<anonymous> (/home/mindprobe/Desktop/Repos/Node-Reference/Winston Logger/2_log_file_rotation.js:89:42)
+[ 2021-06-23 13:40:04 ] error: [ Express - GET ] Bad Request Error: Bad Request
+    at Object.<anonymous> (/home/mindprobe/Desktop/Repos/Node-Reference/Winston Logger/2_log_file_rotation.js:113:12)
     at Module._compile (node:internal/modules/cjs/loader:1108:14)
     at Object.Module._extensions..js (node:internal/modules/cjs/loader:1137:10)
     at Module.load (node:internal/modules/cjs/loader:973:32)
