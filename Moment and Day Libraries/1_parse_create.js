@@ -9,6 +9,7 @@
 // -------------------------------------------------------------------------------------------------------
 
 const moment = require('moment');
+
 const dayjs = require('dayjs');
 const customParseFormat = require('dayjs/plugin/customParseFormat');
 const arraySupport = require('dayjs/plugin/arraySupport');
@@ -83,7 +84,7 @@ console.log(moment.utc(new Date(2010, 1, 14, 15, 25, 50, 125)).format());   // 2
 
 // -------
 
-console.log(dayjs(new Date(2010, 1, 14, 15, 25, 50, 125)).format());       // 2010-02-14T15:25:50+01:00
+console.log(dayjs(new Date(2010, 1, 14, 15, 25, 50, 125)).format());        // 2010-02-14T15:25:50+01:00
 // This dependent on UTC plugin to work
 dayjs.extend(utc);
-console.log(dayjs.utc(new Date(2010, 1, 14, 15, 25, 50, 125)).format());   // 2010-02-14T14:25:50Z
+console.log(dayjs.utc(new Date(2010, 1, 14, 15, 25, 50, 125)).format());    // 2010-02-14T14:25:50Z
