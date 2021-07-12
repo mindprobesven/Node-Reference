@@ -1,0 +1,53 @@
+{
+  /*
+  Chapter 1 - Activate real-time linting with the ESLint VSCode extension
+  --------------------------------------------------------------------------------------
+  1. The ESLint VSCode extension requires the eslint library
+  npm install --save-dev eslint
+
+  2. The 'extends' property enables a subset of core rules
+  Some built-in one are: 
+  "extends": "eslint:recommended",
+  or
+  "extends": "eslint:all",
+
+  However, we want to use the rules configuration provided by airbnb,
+  to be specific eslint-config-airbnb-base, Airbnb's base JS .eslintrc
+  (without React plugins) as an extensible shared config.
+  It requires eslint and eslint-plugin-import
+  npm install --save-dev eslint-config-airbnb-base eslint-plugin-import
+
+  Update the 'extends' property to
+  "extends": ["airbnb-base"]
+
+  At this point, real-time linting is now working in VSCode using the airbnb-base
+  config.
+
+  Chapter 2 - Manually running a lint check on files
+  --------------------------------------------------------------------------------------
+  1. With this npm script ESLint will perform linting on all .js files in the src directory
+  "lint": "eslint src/**",
+
+  Chapter 3 - Running a lint check on files with watch mode
+  --------------------------------------------------------------------------------------
+  1. Requires the eslint-watch library
+  npm install --save-dev eslint-watch
+
+  2. With this npm script, the eslint-watch library will perform linting on all .js files
+  in the src directory with watch mode.
+  "lint-watch": "esw --color -w src/**"
+  */
+  "root": true,
+  "env": {
+    "node": true,
+    "browser": false
+  },
+  "extends": ["airbnb-base"],
+  // These rules override the ones specified in the config provided by 'extends'
+  "rules": {
+    "max-len": ["warn", 80, 2, {"ignoreComments": true}],
+    "indent": ["error", 2],
+    "semi": ["error", "always"],
+    "no-console":  ["error", { "allow": ["warn", "error", "log"] }]
+  }
+}

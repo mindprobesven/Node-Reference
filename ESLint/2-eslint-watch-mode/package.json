@@ -1,0 +1,21 @@
+{
+  "name": "eslintnode",
+  "version": "1.0.0",
+  "description": "ESLint for Node",
+  "private": true,
+  "author": "Sven Kohn",
+  "license": "ISC",
+  "scripts": {
+    "mode-dev": "NODE_ENV=development nodemon src/main.js",
+    "mode-prod": "NODE_ENV=production nodemon src/main.js",
+    "lint": "eslint src/**",
+    "lint-watch": "esw --color -w src/**"
+  },
+  "devDependencies": {
+    "eslint": "^7.30.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-watch": "^7.0.0",
+    "nodemon": "^2.0.7"
+  }
+}
