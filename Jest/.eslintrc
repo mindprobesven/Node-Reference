@@ -1,0 +1,17 @@
+{
+  "env": {
+    "node": true
+  },
+  "plugins": ["jest"],
+  "extends": [
+    "plugin:jest/recommended",
+    "plugin:jest/style",
+    "airbnb"
+  ],
+  "rules": {
+    "max-len": ["warn", 80, 2, {"ignoreComments": true}],
+    "indent": ["error", 2],
+    "semi": ["error", "always"],
+    "no-console":  ["error", { "allow": ["warn", "error", "log"] }]
+  }
+}

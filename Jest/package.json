@@ -1,0 +1,21 @@
+{
+  "name": "jest-reference",
+  "version": "1.0.0",
+  "description": "Jest - Reference",
+  "private": true,
+  "author": "Sven Kohn",
+  "license": "ISC",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "start": "NODE_ENV=development nodemon src/index.js"
+  },
+  "devDependencies": {
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.4.0",
+    "jest": "^27.1.0",
+    "nodemon": "^2.0.7"
+  }
+}
