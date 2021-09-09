@@ -13,6 +13,10 @@ There are two ways to mock functions:
 2. Writing a manual mock to override a module dependency (https://jestjs.io/docs/manual-mocks)
 */
 
+// Using a mock function
+// ----------------------------------------------------------------------------
+
+// This function invokes a callback for each item in a supplied array.
 function forEachItem(items, callback) {
   items.forEach((item) => {
     callback(item);
@@ -29,7 +33,7 @@ forEachItem([1, 2, 3], someCallback);
 // We can use a mock function.
 // const mockCallback = jest.fn((item) => 42 + item);
 // or, simply pass a reference to the callback function to be tested
-const mockCallback = jest.fn(someCallback).mockName('add42');
+const mockCallback = jest.fn(someCallback);
 
 test('The mock function (mockCallback) is called three times', () => {
   forEachItem([1, 2, 3], mockCallback);
@@ -70,3 +74,22 @@ Output:
   ]
 }
 */
+
+// Instances
+// ----------------------------------------------------------------------------
+const MyMock = jest.fn(() => ({
+  x: 42,
+  getX() {
+    return this.x;
+  },
+}));
+
+const a = new MyMock();
+console.log(a.getX());
+
+const b = {};
+const bound = MyMock.bind(b);
+bound();
+console.log(b.getX);
+
+console.log(MyMock.mock.instances);
