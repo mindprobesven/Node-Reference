@@ -2,31 +2,37 @@
 /*
 Jest - Setup, Teardown and Scoping
 ----------------------------------------------------------------------------
+
+beforeEach and afterEach
+Provides a way to perform some action before and after each test.
+
+beforeAll and afterAll
+Provides a way to perform some action before and after all tests.
+
+describe
+Provides a way to group tests. Jest executes all describe handlers in a test
+file before it executes any of the actual tests.
 */
 
 let database;
 const data = [];
 
 function connectDB() {
-  console.log('Connected');
   database = 'connected';
   return Promise.resolve();
 }
 
 function closeDB() {
-  console.log('Closed');
   database = 'closed';
   return Promise.resolve();
 }
 
 function populateDB() {
-  console.log('Init');
   data.push('Sven', 'Barbara', 'Valentina');
   return Promise.resolve('initialized');
 }
 
 function clearDB() {
-  console.log('Clear');
   data.length = 0;
   return Promise.resolve('cleared');
 }
@@ -61,5 +67,11 @@ describe('Data test', () => {
 
   test('data includes Valentina', () => {
     expect(data).toContain('Valentina');
+  });
+});
+
+describe('Foo', () => {
+  test('Foo test', () => {
+    expect(true).toBe(true);
   });
 });
