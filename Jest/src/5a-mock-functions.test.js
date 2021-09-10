@@ -60,7 +60,7 @@ test('The return value of the first call to the function was 43', () => {
 // All mock functions have this special .mock property, which is where data about
 // how the function has been called and what the function returned is kept.
 forEachItem([1, 2, 3], mockCallback);
-console.log(mockCallback.mock);
+// console.log(mockCallback.mock);
 /*
 Output:
 {
@@ -74,22 +74,3 @@ Output:
   ]
 }
 */
-
-// Instances
-// ----------------------------------------------------------------------------
-const MyMock = jest.fn(() => ({
-  x: 42,
-  getX() {
-    return this.x;
-  },
-}));
-
-const a = new MyMock();
-console.log(a.getX());
-
-const b = {};
-const bound = MyMock.bind(b);
-bound();
-console.log(b.getX);
-
-console.log(MyMock.mock.instances);
