@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /*
 Jest - Mock Functions
 ----------------------------------------------------------------------------
@@ -74,3 +75,30 @@ Output:
   ]
 }
 */
+
+// Custom matchers
+// ----------------------------------------------------------------------------
+// In order to make it less demanding to assert how mock functions have been called,
+// here are some custom matcher functions. These matchers are sugar for common forms
+// of inspecting the .mock property.
+test('Testing custom matchers on mock function', () => {
+  forEachItem([1, 2, 3], mockCallback);
+
+  // The mock function was called at least once
+  expect(mockCallback).toHaveBeenCalled();
+  expect(mockCallback.mock.calls.length).toBeGreaterThan(0);
+
+  // The mock function was called amount of times
+  expect(mockCallback.mock.calls).toHaveLength(3);
+
+  // The mock function was called at least once with the specified args
+  expect(mockCallback).toHaveBeenCalledWith(2);
+  expect(mockCallback.mock.calls).toContainEqual([2]);
+
+  // The last call to the mock function was called with the specified args
+  expect(mockCallback).toHaveBeenLastCalledWith(3);
+  expect(mockCallback.mock.calls[mockCallback.mock.calls.length - 1]).toEqual([3]);
+
+  // The first arg of the last call to the mock function was `42`
+  expect(mockCallback.mock.calls[mockCallback.mock.calls.length - 1][0]).toBe(3);
+});
