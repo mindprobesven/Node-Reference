@@ -32,11 +32,10 @@ Running tests using the VSCode extension 'Jest'
 ----------------------------------------------------------------------------
 1. Install the VSCode extension 'Jest'
 2. In the VSCode settings add:
-"jest.autoRun": {"watch": false, "onSave": "test-file", "onStartup": ["all-tests"]},
+"jest.autoRun": {"watch": false, "onSave": "test-file"},
 
 With this configuration, the extension will trigger test run for the given test file
-upon save. Watch mode is disabled. It will also start running all tests upon project
-launch to update overall project test stats.
+upon save. Watch mode is disabled.
 */
 
 function sum(a, b) {
