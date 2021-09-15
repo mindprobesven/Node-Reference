@@ -8,6 +8,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
+    "test:watch:single": "jest --watch --findRelatedTests src/6a-manual-mock-function/User.js",
     "start": "NODE_ENV=development nodemon src/index.js"
   },
   "devDependencies": {
