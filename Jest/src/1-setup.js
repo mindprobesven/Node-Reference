@@ -26,6 +26,7 @@ Add to package.json
 "scripts": {
   "test": "jest",
   "test:watch": "jest --watchAll",
+  "test:watch:single": "jest --watch --findRelatedTests src/6b-manual-mock-core-node-modules/fileTool.js",
 }
 
 Running tests using the VSCode extension 'Jest'
@@ -35,7 +36,7 @@ Running tests using the VSCode extension 'Jest'
 "jest.autoRun": {"watch": false, "onSave": "test-file"},
 
 With this configuration, the extension will trigger test run for the given test file
-upon save. Watch mode is disabled.
+upon save.
 */
 
 function sum(a, b) {
