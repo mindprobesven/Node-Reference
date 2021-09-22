@@ -8,7 +8,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "test:watch:single": "jest --watch --findRelatedTests src/6b-manual-mock-core-node-modules/fileTool.js",
+    "test:watch:single": "jest --watch --findRelatedTests src/7c-class-mocks-module-factory/SoundPlayerConsumer.test.js",
     "start": "NODE_ENV=development nodemon src/index.js"
   },
   "devDependencies": {
