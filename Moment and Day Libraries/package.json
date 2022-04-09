@@ -16,6 +16,6 @@
   },
   "dependencies": {
     "dayjs": "^1.10.5",
-    "moment": "^2.29.1"
+    "moment": "^2.29.2"
   }
 }
